@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/ruraltail-mlr-banner.svg" alt="RuralTail-MLR banner" width="100%">
+  <img src="docs/assets/ruraltail-mlr-framework.png" alt="TALC paper framework" width="100%">
 </p>
 
 <h1 align="center">RuralTail-MLR</h1>
