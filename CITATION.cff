@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "If you use RuralTail-MLR, please cite the TALC paper."
+title: "TALC: Tail-Aware Label Conversion for Long-Tailed Multi-Label Remote-Sensing Recognition"
+authors:
+  - name: "RuralTail-MLR Authors"
+year: 2026
+license: MIT

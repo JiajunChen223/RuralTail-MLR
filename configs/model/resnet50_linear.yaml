@@ -1,0 +1,6 @@
+name: resnet50_linear
+backbone: resnet50
+pretrained: true
+head: linear
+embedding_dim: 2048
+dropout: 0.1

@@ -1,0 +1,10 @@
+name: china_mas_50k
+raw_root: data/raw/china_mas_50k
+images_index: data/processed/images_index.csv
+labels: data/processed/labels_clean.csv
+split: data/processed/fixed_split.csv
+class_mapping: data/processed/class_mapping.json
+frequency: data/processed/class_frequency.csv
+hmt: data/processed/head_medium_tail.json
+image_root: data/raw/china_mas_50k/China-MAS-50k_image
+num_classes: 18

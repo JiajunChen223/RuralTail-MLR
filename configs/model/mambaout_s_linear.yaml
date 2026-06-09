@@ -1,0 +1,7 @@
+name: mambaout_s_linear
+backbone: mambaout_small
+pretrained: true
+head: linear
+feature_dim: 2304
+embedding_dim: 2304
+dropout: 0.1

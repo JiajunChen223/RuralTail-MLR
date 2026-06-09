@@ -1,0 +1,46 @@
+defaults:
+  - data: china_mas_50k
+  - model: resnet50_linear
+  - loss: asl
+  - _self_
+  - experiment: main_resnet50
+
+run:
+  name: default
+  seed: 2026
+  output_dir: outputs/runs
+  monitor: mAP
+  monitor_mode: max
+
+train:
+  input_size: 384
+  batch_size: 32
+  gradient_accumulation_steps: 2
+  epochs: 30
+  num_workers: 4
+  optimizer: adamw
+  lr: 5e-5
+  weight_decay: 0.05
+  scheduler:
+    name: warmup_cosine
+    warmup_epochs: 2
+    warmup_start_factor: 0.1
+    eta_min: 1e-6
+  amp: true
+  max_grad_norm: 1.0
+  device: auto
+  threshold: 0.5
+  save_last: true
+  early_stopping:
+    enabled: true
+    monitor: mAP
+    mode: max
+    patience: 6
+    min_delta: 0.0002
+    min_epochs: 12
+
+eval:
+  threshold: 0.5
+  tune_threshold_on_val: false
+  threshold_strategy: global
+  threshold_grid: [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7]

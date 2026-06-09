@@ -1,0 +1,31 @@
+paper_protocol:
+  protocol: configs/protocol/paper_talc.yaml
+  datasets:
+    china_mas_50k:
+      models:
+        - resnet50
+        - efficientnetv2_s
+        - pvtv2_b2
+        - mambaout_s
+        - recent_sfin_resnet18
+        - recent_mlmamba_resnet18
+      score_sources: [bce, focal, asl, talc]
+      train_entrypoint: scripts/train_score_sources_china.sh
+    agriculture_vision_2021:
+      models:
+        - resnet50
+        - pvtv2_b2
+        - mambaout_s
+      score_sources: [bce, focal, asl, talc]
+      train_entrypoint: scripts/train_score_sources_agv.sh
+  eval_entrypoint: scripts/evaluate_paper_protocol.sh
+  table_entrypoint: scripts/reproduce_paper_tables.sh
+  operating_rules:
+    fixed: fixed 0.5
+    group: validation-selected H/M/T group thresholds
+    diagnostic_only: [global, classwise]
+  public_display:
+    bce: [BCE-F, BCE-G]
+    focal: [Focal-F, Focal-G]
+    asl: [ASL-F, ASL-G]
+    talc: [TALC-F, TALC-G]

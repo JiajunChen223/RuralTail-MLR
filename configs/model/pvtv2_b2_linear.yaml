@@ -1,0 +1,6 @@
+name: pvtv2_b2_linear
+backbone: pvt_v2_b2
+pretrained: true
+head: linear
+embedding_dim: 512
+dropout: 0.1

@@ -1,0 +1,10 @@
+name: agriculture_vision_2021
+raw_root: data/raw/agriculture_vision_2021/Agriculture-Vision-2021
+images_index: data/processed/agriculture_vision_2021/images_index.csv
+labels: data/processed/agriculture_vision_2021/labels_clean.csv
+split: data/processed/agriculture_vision_2021/fixed_split.csv
+class_mapping: data/processed/agriculture_vision_2021/class_mapping.json
+frequency: data/processed/agriculture_vision_2021/class_frequency.csv
+hmt: data/processed/agriculture_vision_2021/head_medium_tail.json
+image_root: data/raw/agriculture_vision_2021/Agriculture-Vision-2021
+num_classes: 9

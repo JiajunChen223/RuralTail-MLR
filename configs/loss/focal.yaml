@@ -1,0 +1,5 @@
+cls:
+  name: focal
+  gamma: 2.0
+  alpha: 0.25
+  reduction: mean

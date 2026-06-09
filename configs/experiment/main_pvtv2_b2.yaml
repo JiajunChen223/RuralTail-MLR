@@ -1,0 +1,31 @@
+# @package _global_
+run:
+  name: pvtv2_b2_asl
+train:
+  input_size: 384
+  batch_size: 32
+  gradient_accumulation_steps: 2
+  epochs: 30
+  optimizer: adamw
+  lr: 5e-5
+  weight_decay: 0.05
+  amp: false
+  scheduler:
+    name: warmup_cosine
+    warmup_epochs: 2
+    warmup_start_factor: 0.1
+    eta_min: 1e-6
+  early_stopping:
+    enabled: true
+    monitor: mAP
+    mode: max
+    patience: 6
+    min_delta: 0.0002
+    min_epochs: 12
+model:
+  name: pvtv2_b2_linear
+  backbone: pvt_v2_b2
+  pretrained: true
+  head: linear
+  embedding_dim: 512
+  dropout: 0.1

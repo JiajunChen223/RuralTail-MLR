@@ -1,0 +1,5 @@
+name: mlmamba
+backbone: resnet18
+pretrained: true
+head: mlmamba
+hidden_dim: 128

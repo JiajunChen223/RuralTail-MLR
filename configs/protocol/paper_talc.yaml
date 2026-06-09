@@ -1,0 +1,94 @@
+name: paper_talc
+description: TALC paper protocol for score-source training and operating-boundary evaluation.
+
+datasets:
+  china_mas_50k:
+    role: main
+    split_seed: 20260425
+    split_strategy: iterative_stratification_80_10_10
+    models: [resnet50, efficientnetv2_s, pvtv2_b2, mambaout_s, recent_sfin_resnet18, recent_mlmamba_resnet18]
+  agriculture_vision_2021:
+    role: second_dataset
+    split_seed: 20260501
+    split_strategy: field_id_grouped_80_10_10_over_official_train_val_labeled_pool
+    models: [resnet50, pvtv2_b2, mambaout_s]
+
+score_sources:
+  bce:
+    display: BCE
+    loss: bce
+  focal:
+    display: Focal
+    loss: focal
+  asl:
+    display: ASL
+    loss: asl
+  talc:
+    display: TALC
+    method: asl_softf1_t
+    loss: asl_soft_f1
+
+operating_rules:
+  fixed:
+    display_suffix: F
+    report_as: formal
+    threshold: 0.5
+  group:
+    display_suffix: G
+    report_as: formal
+    strategy: group
+    selection_split: val
+    objective: group_macro_F1
+    grid: [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7]
+  diagnostic:
+    rules: [global, classwise]
+    report_as: diagnostic_only
+
+training:
+  seed: 2026
+  input_size_default: 384
+  input_size_overrides:
+    recent_sfin_resnet18: 256
+    recent_mlmamba_resnet18: 256
+  batch_size: 32
+  gradient_accumulation_steps: 2
+  epochs: 30
+  optimizer: adamw
+  lr: 5e-5
+  weight_decay: 0.05
+  scheduler:
+    name: warmup_cosine
+    warmup_epochs: 2
+    warmup_start_factor: 0.1
+    eta_min: 1e-6
+  checkpoint_monitor: mAP
+  early_stopping:
+    enabled: true
+    monitor: mAP
+    mode: max
+    patience: 6
+    min_delta: 0.0002
+    min_epochs: 12
+
+talc_loss:
+  lambda_soft_f1: 0.2
+  lambda_tail_recall: 0.05
+  soft_temperature: 0.5
+  tail_recall_target: 0.65
+  reference_thresholds:
+    head: 0.5
+    medium: 0.35
+    tail: 0.25
+  group_weights:
+    head: 1.0
+    medium: 1.25
+    tail: 1.5
+
+public_method_policy:
+  main_score_sources: [bce, focal, asl, talc]
+  formal_operating_rules: [fixed, group]
+  public_display_rows: [BCE-F, BCE-G, Focal-F, Focal-G, ASL-F, ASL-G, TALC-F, TALC-G]
+  diagnostic_only_methods: []
+  analysis_notes:
+    - Global and classwise threshold searches are diagnostic outputs only.
+    - The public protocol uses fixed 0.5 and validation-selected H/M/T group operating rules.
