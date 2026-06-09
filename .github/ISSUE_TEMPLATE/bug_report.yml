@@ -1,0 +1,54 @@
+name: Bug report
+description: Report a reproducible problem in the code or protocol tooling.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What went wrong, and what did you expect instead?
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: Command
+      description: Paste the shortest command that reproduces the problem.
+      placeholder: "GPU_LIST=0 bash scripts/evaluate_paper_protocol.sh"
+    validations:
+      required: true
+  - type: dropdown
+    id: dataset
+    attributes:
+      label: Dataset protocol
+      options:
+        - China-MAS-50k
+        - Agriculture-Vision-2021
+        - Other or not dataset-specific
+    validations:
+      required: true
+  - type: input
+    id: carrier
+    attributes:
+      label: Carrier
+      placeholder: "RN50, EffV2-S, PVT-B2, MOut-S, SFIN-R18, MLM-R18"
+  - type: input
+    id: method
+    attributes:
+      label: Score source and operating rule
+      placeholder: "TALC-G, ASL-F, BCE-F, etc."
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include Python, PyTorch, CUDA, GPU, OS, and dependency notes.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Paste the shortest relevant traceback or log excerpt.
+      render: text

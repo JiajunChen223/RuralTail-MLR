@@ -1,0 +1,37 @@
+name: Reproduction question
+description: Ask a question about reproducing a paper-protocol result.
+title: "[Reproduction]: "
+labels: ["reproduction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please include enough protocol detail to identify the exact stage.
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Stage
+      options:
+        - Environment setup
+        - Data preparation
+        - Training score sources
+        - Evaluation manifest
+        - Fixed 0.5 evaluation (-F)
+        - H/M/T group evaluation (-G)
+        - Paper table generation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What are you trying to reproduce or understand?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Include commands, configs, dataset protocol, carrier, and score source when relevant.
+      render: text

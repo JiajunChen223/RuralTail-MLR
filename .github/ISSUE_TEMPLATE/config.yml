@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Reproduction guide
+    url: https://github.com/JiajunChen223/RuralTail-MLR/blob/main/REPRODUCE.md
+    about: Check the compact paper-protocol reproduction notes first.
